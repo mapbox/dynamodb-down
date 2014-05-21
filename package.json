@@ -1,0 +1,32 @@
+{
+  "name": "dyn",
+  "version": "0.0.0",
+  "description": "a dynamodb storage backend for leveldown",
+  "main": "index.js",
+  "scripts": {
+    "test": "tap --tap test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:mapbox/dyn.git"
+  },
+  "keywords": [
+    "dynamo",
+    "leveldb",
+    "leveldown-abstract"
+  ],
+  "author": "Tom MacWright",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mapbox/dyn/issues"
+  },
+  "homepage": "https://github.com/mapbox/dyn",
+  "dependencies": {
+    "aws-sdk": "~2.0.0-rc.17",
+    "abstract-leveldown": "~0.12.2"
+  },
+  "devDependencies": {
+    "tap": "~0.4.9",
+    "dynalite": "~0.3.6"
+  }
+}
