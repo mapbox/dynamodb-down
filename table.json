@@ -1,0 +1,15 @@
+{
+    "TableName": "",
+    "AttributeDefinitions": [
+        {"AttributeName": "hash", "AttributeType": "S"},
+        {"AttributeName": "id", "AttributeType": "S"}
+    ],
+    "KeySchema": [
+        {"AttributeName": "hash", "KeyType": "HASH"},
+        {"AttributeName": "id", "KeyType": "RANGE"}
+    ],
+    "ProvisionedThroughput": {
+        "ReadCapacityUnits": 5,
+        "WriteCapacityUnits": 50
+    }
+}
