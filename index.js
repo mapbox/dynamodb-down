@@ -27,34 +27,34 @@ function Dyn(location) {
 
 util.inherits(Dyn, AbstractLevelDOWN);
 
-Dyn.prototype._open = function (options, callback) {
+Dyn.prototype._open = function(options, callback) {
     tableLayout.TableName = this._table;
     ensureTableExists(this._client, tableLayout, function() {
-        console.log(arguments);
         callback();
     });
 };
 
-Dyn.prototype._close = function (callback) {
+Dyn.prototype._close = function(callback) {
+    if (typeof callback !== 'function') throw new Error('close() requires a callback argument');
     process.nextTick(function() {
         callback();
     });
 };
 
-Dyn.prototype._put = function (key, value, options, callback) {
+Dyn.prototype._put = function(key, value, options, callback) {
     this._client.putItem({
         TableName: this._table,
         Item: {
             id: { S: key },
             hash: { S: this._hash },
-            value: { S: value }
+            value: { S: value.toString() }
         }
     }, function(err) {
-        callback();
+        callback(err);
     });
 };
 
-Dyn.prototype._get = function (key, options, callback) {
+Dyn.prototype._get = function(key, options, callback) {
     this._client.getItem({
         Key: {
             id: { S: key },
@@ -78,7 +78,7 @@ Dyn.prototype._get = function (key, options, callback) {
     }
 };
 
-Dyn.prototype._del = function (key, options, callback) {
+Dyn.prototype._del = function(key, options, callback) {
     this._client.deleteItem({
         Key: {
             id: { S: key },
@@ -93,11 +93,11 @@ Dyn.prototype._del = function (key, options, callback) {
     }
 };
 
-Dyn.prototype._batch = function (array, options, callback) {
+Dyn.prototype._batch = function(array, options, callback) {
     callback();
 };
 
-Dyn._siblingResolver = function (key, siblings, options, callback) {
+Dyn._siblingResolver = function(key, siblings, options, callback) {
     callback(null, siblings[0].value);
 };
 
